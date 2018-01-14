@@ -1,16 +1,18 @@
 extends Node
 
-const ENEMIGO_KAMIKAZE = preload("res://Scenes/EnemigoKamikaze.tscn")
+const ENEMIGOS = [
+preload("res://Scenes/EnemigoKamikaze.tscn"),
+preload("res://Scenes/EnemigoDispara.tscn")
+]
 
 func _ready():
-	_aparecer()
+	aparecer()
 	pass
 
-func _aparecer():
-	
+func aparecer():
 	while true:
 		randomize()
-		var enemigo = ENEMIGO_KAMIKAZE.instance()
+		var enemigo = choose(ENEMIGOS).instance()
 		var posicion = Vector2()
 		posicion.x = rand_range(0 + 16, get_viewport().get_visible_rect().size.width - 16)
 		posicion.y = 0 - 16
@@ -27,4 +29,10 @@ func create_timer(wait_time):
 	add_child(timer)
 	timer.start()
 	return timer
+	pass
+	
+func choose(choises):
+	randomize()
+	var rand_index = randi() % choises.size()
+	return choises[rand_index]
 	pass

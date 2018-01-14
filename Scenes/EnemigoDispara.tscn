@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://Scenes/Enemigos.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/EnemigoDispara.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/enemy_clever.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 16, 16 )
+
+[node name="EnemigoDispara" instance=ExtResource( 1 )]
+
+script/script = ExtResource( 2 )
+velocidad = Vector2( 50, 50 )
+
+[node name="Sprite" parent="."]
+
+texture = ExtResource( 3 )
+
+[node name="Forma" parent="."]
+
+shape = SubResource( 1 )
+
+[node name="Canon" type="Position2D" parent="."]
+
+transform/pos = Vector2( 0, 4 )
+
+
