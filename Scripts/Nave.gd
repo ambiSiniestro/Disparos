@@ -9,10 +9,12 @@ func _ready():
 	pass
 
 func _process(delta):
-	var motion = (get_global_mouse_pos().x - get_pos().x) * 0.1
-	translate(Vector2(motion, 0))
+	var motionX = (get_global_mouse_pos().x - get_pos().x) * 0.1
+	#var motionY = (get_global_mouse_pos().y - get_pos().y) * 0.1
+	translate(Vector2(motionX, 0))
 	var pos = get_pos()
 	pos.x = clamp(pos.x, 0 + 16, get_viewport_rect().size.width - 16)
+	#pos.y = clamp(pos.y, 0 + 16, get_viewport_rect().size.height - 16)
 	set_pos(pos)
 	pass
 
