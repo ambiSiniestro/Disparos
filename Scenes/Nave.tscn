@@ -20,6 +20,9 @@ gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 
@@ -30,8 +33,15 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
-__meta__ = {
-"_edit_group_": true
-}
+
+[node name="Canon" type="Node2D" parent="."]
+
+[node name="Izquierda" type="Position2D" parent="Canon"]
+
+transform/pos = Vector2( -12, -8 )
+
+[node name="Derecha" type="Position2D" parent="Canon"]
+
+transform/pos = Vector2( 12, -8 )
 
 

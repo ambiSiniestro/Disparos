@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://Scripts/Laser.gd" type="Script" id=1]
+
+[node name="Laser" type="Area2D"]
+
+input/pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+velocidad = Vector2( 0, 0 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="Forma" type="CollisionShape2D" parent="."]
+
+trigger = false
+_update_shape_index = -1
+
+[node name="NotificadorVisibilidad" type="VisibilityEnabler2D" parent="."]
+
+rect = Rect2( -10, -10, 20, 20 )
+enabler/pause_animations = true
+enabler/freeze_bodies = true
+enabler/pause_particles = true
+enabler/pause_animated_sprites = true
+enabler/process_parent = false
+enabler/fixed_process_parent = false
+
+
