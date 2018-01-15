@@ -13,6 +13,7 @@ extents = Vector2( 16, 16 )
 
 script/script = ExtResource( 2 )
 velocidad = Vector2( 50, 50 )
+armadura = 6
 
 [node name="Sprite" parent="."]
 

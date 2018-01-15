@@ -1,25 +1,25 @@
 extends Node
 
-const ENEMIGOS = [
-preload("res://Scenes/EnemigoKamikaze.tscn"),
-preload("res://Scenes/EnemigoDispara.tscn")
+const POWERUPS = [
+preload("res://Scenes/PowerUpEnergia.tscn"),
+preload("res://Scenes/PowerUpLaser.tscn")
 ]
 
 func _ready():
-	yield(create_timer(1.2), "timeout")
+	yield(create_timer(rand_range(10, 15)), "timeout")
 	aparecer()
 	pass
 
 func aparecer():
 	while true:
 		randomize()
-		var enemigo = choose(ENEMIGOS).instance()
+		var powerup = choose(POWERUPS).instance()
 		var posicion = Vector2()
-		posicion.x = rand_range(0 + 16, get_viewport().get_visible_rect().size.width - 16)
-		posicion.y = 0 - 16
-		enemigo.set_pos(posicion)
-		get_node("Contenedor").add_child(enemigo)
-		yield(create_timer(rand_range(0.5, 1.25)), "timeout")
+		posicion.x = rand_range(0 + 7, get_viewport().get_visible_rect().size.width - 7)
+		posicion.y = 0 - 7
+		powerup.set_pos(posicion)
+		get_node("Contenedor").add_child(powerup)
+		yield(create_timer(rand_range(10, 15)), "timeout")
 	pass
 	
 func create_timer(wait_time):

@@ -1,15 +1,164 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=17 format=1]
 
-[ext_resource path="res://Scenes/Estrellas.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Nave.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/CreaEnemigos.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/Camara.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Estrellas.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Nave.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/CreaPowerUps.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/CreaEnemigos.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Sprites/armor.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/Armadura.gd" type="Script" id=7]
+[ext_resource path="res://Sprites/score.png" type="Texture" id=8]
+[ext_resource path="res://Scripts/CuadroTexto.gd" type="Script" id=9]
+[ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://Sprites/button_normal.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/button_pressed.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/button_hover.png" type="Texture" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+
+font/size = 16
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 10 )
+
+[sub_resource type="GDScript" id=4]
+
+script/source = "extends TextureButton
+
+func _ready():
+	connect(\"pressed\", self, \"_on_pressed\")
+	utils.attach(\"Nave\", \"exit_tree\", self, \"_on_ship_exit_tree\")
+	pass
+
+func _on_pressed():
+	get_tree().change_scene(\"res://Stages/Menu.tscn\")
+	pass
+	
+func _on_ship_exit_tree():
+	show()
+	pass"
+
+[sub_resource type="DynamicFont" id=3]
+
+font/size = 16
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 10 )
 
 [node name="Mundo" type="Node"]
 
-[node name="Estrellas" parent="." instance=ExtResource( 1 )]
+[node name="Camara" type="Camera2D" parent="."]
 
-[node name="Nave" parent="." instance=ExtResource( 2 )]
+anchor_mode = 0
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+script/script = ExtResource( 1 )
 
-[node name="CreaEnemigos" parent="." instance=ExtResource( 3 )]
+[node name="Estrellas" parent="." instance=ExtResource( 2 )]
+
+[node name="Nave" parent="." instance=ExtResource( 3 )]
+
+[node name="CreaPowerUps" parent="." instance=ExtResource( 4 )]
+
+[node name="CreaEnemigos" parent="." instance=ExtResource( 5 )]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="Armadura" type="Sprite" parent="HUD"]
+
+transform/pos = Vector2( 10, 10 )
+texture = ExtResource( 6 )
+centered = false
+hframes = 5
+frame = 4
+script/script = ExtResource( 7 )
+
+[node name="CuadroTexto" type="TextureFrame" parent="HUD"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 123.0
+margin/top = 10.0
+margin/right = 170.0
+margin/bottom = 30.0
+texture = ExtResource( 8 )
+stretch_mode = 0
+script/script = ExtResource( 9 )
+
+[node name="Label" type="Label" parent="HUD/CuadroTexto"]
+
+rect/min_size = Vector2( 41, 14 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 3.0
+margin/top = 1.0
+margin/right = 43.0
+margin/bottom = 15.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="BtnMenu" type="TextureButton" parent="HUD"]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 67.0
+margin/top = 134.0
+margin/right = 114.0
+margin/bottom = 150.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 11 )
+textures/pressed = ExtResource( 12 )
+textures/hover = ExtResource( 13 )
+params/resize_mode = 0
+params/stretch_mode = 0
+script/script = SubResource( 4 )
+
+[node name="Label" type="Label" parent="HUD/BtnMenu"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 1.0
+margin/top = 0.0
+margin/right = 47.0
+margin/bottom = 16.0
+custom_fonts/font = SubResource( 3 )
+text = "MENU"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 
